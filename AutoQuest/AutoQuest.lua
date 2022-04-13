@@ -351,6 +351,10 @@ repeatableList["Vanquish the Invaders!"].level = 60
 -- These quests will be automatically accepted if the daily setting is enabled
 ----------------------------------------------------------------------------------------------------
 local dailyList = {
+	-- Ascension Quests
+	["Forging Mystic Power"] = true,
+	["Mystic Scrolls: Unlocking Epic Powers"] = true,
+	["Mystic Scrolls: Unlocking Legendary Powers"] = true,
 	-- Cooking/Fishing
 	["Bait Bandits"] = true,
 	["Crocolisks in the City"] = true,
