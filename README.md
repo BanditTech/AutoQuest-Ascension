@@ -1,6 +1,7 @@
 # AutoQuest
 
-###### Scary warning: Most of these addons were made long ago during Feenix days, then a lot was changed/added to prepare for Corecraft. Since it died, they still haven't been extensively tested on modern servers.
+## Ascension Server
+* This addon has been modified to automate quests specific to Ascension Classless WOW server. This includes a small list of new daily quests specific to the Ascension server, but I intend to add several more.
 
 ### [Downloads](https://github.com/BanditTech/AutoQuest-Ascension/releases)
 
