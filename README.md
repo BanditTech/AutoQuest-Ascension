@@ -2,7 +2,7 @@
 
 ###### Scary warning: Most of these addons were made long ago during Feenix days, then a lot was changed/added to prepare for Corecraft. Since it died, they still haven't been extensively tested on modern servers.
 
-### [Downloads](https://github.com/Shanghi/AutoQuest/releases)
+### [Downloads](https://github.com/BanditTech/AutoQuest-Ascension/releases)
 
 ***
 
