@@ -353,6 +353,8 @@ repeatableList["Vanquish the Invaders!"].level = 60
 local dailyList = {
 	-- Ascension Quests
 	["Forging Mystic Power"] = true,
+	["Hero Architect: Mystic Runes (Daily)"] = true,
+	["Hero Architect: Scroll of Unlearning - (Repeatable)"] = true,
 	["Mystic Scrolls: Unlocking Epic Powers"] = true,
 	["Mystic Scrolls: Unlocking Legendary Powers"] = true,
 	-- Cooking/Fishing
