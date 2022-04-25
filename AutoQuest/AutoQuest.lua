@@ -354,6 +354,7 @@ local dailyList = {
 	-- Ascension Quests
 	["Forging Mystic Power"] = true,
 	["Hero Architect: Mystic Runes (Daily)"] = true,
+	["Hero Architect: Mystic Orbs (Daily)"] = true,
 	["Hero Architect: Scroll of Unlearning - (Repeatable)"] = true,
 	["Mystic Scrolls: Unlocking Epic Powers"] = true,
 	["Mystic Scrolls: Unlocking Legendary Powers"] = true,
