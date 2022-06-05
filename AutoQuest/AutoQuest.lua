@@ -537,7 +537,7 @@ eventFrame:SetScript("OnEvent", function(self, event)
 		on_quest = 1
 		repeat
 			name, level = select(1 + ((on_quest-1)*3), GetGossipAvailableQuests())
-			if name and not acceptedQuests[name] and IsQuestEnabled(name) then
+			if name and type(name) == "string" and not acceptedQuests[name] and IsQuestEnabled(name) then
 				acceptedQuests[name] = true
 				if (AutoQuestSave.autoDaily and dailyList[name]) or AutoQuestSave.autoAccept or IsQuestComplete(name, level) then
 					SelectGossipAvailableQuest(on_quest)
