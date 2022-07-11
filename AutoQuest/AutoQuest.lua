@@ -1,5 +1,79 @@
 AutoQuestSave = nil -- player settings - defaults set up during PLAYER_ENTERING_WORLD event
 
+
+local map = { 
+	I = 1,
+	V = 5,
+	X = 10,
+	L = 50,
+	C = 100, 
+	D = 500, 
+	M = 1000,
+}
+local numbers = { 1, 5, 10, 50, 100, 500, 1000 }
+local chars = { "I", "V", "X", "L", "C", "D", "M" }
+
+local RomanNumerals = { }
+
+function RomanNumerals.ToRomanNumerals(s)
+	--s = tostring(s)
+	s = tonumber(s)
+	if not s or s ~= s then error"Unable to convert to number" end
+	if s == math.huge then error"Unable to convert infinity" end
+	s = math.floor(s)
+	if s <= 0 then return s end
+local ret = ""
+			for i = #numbers, 1, -1 do
+			local num = numbers[i]
+			while s - num >= 0 and s > 0 do
+					ret = ret .. chars[i]
+					s = s - num
+			end
+			--for j = i - 1, 1, -1 do
+			for j = 1, i - 1 do
+					local n2 = numbers[j]
+					if s - (num - n2) >= 0 and s < num and s > 0 and num - n2 ~= n2 then
+							ret = ret .. chars[j] .. chars[i]
+							s = s - (num - n2)
+							break
+					end
+			end
+	end
+	return ret
+end
+
+function RomanNumerals.ToNumber(s)
+	s = s:upper()
+	local ret = 0
+	local i = 1
+	while i <= s:len() do
+	--for i = 1, s:len() do
+			local c = s:sub(i, i)
+			if c ~= " " then -- allow spaces
+					local m = map[c] or error("Unknown Roman Numeral '" .. c .. "'")
+					
+					local next = s:sub(i + 1, i + 1)
+					local nextm = map[next]
+					
+					if next and nextm then
+							if nextm > m then 
+							-- if string[i] < string[i + 1] then result += string[i + 1] - string[i]
+							-- This is used instead of programming in IV = 4, IX = 9, etc, because it is
+							-- more flexible and possibly more efficient
+									ret = ret + (nextm - m)
+									i = i + 1
+							else
+									ret = ret + m
+							end
+					else
+							ret = ret + m
+					end
+			end
+			i = i + 1
+	end
+	return ret
+end
+
 ----------------------------------------------------------------------------------------------------
 -- Repeatable quest list - some faction specific quests are added during PLAYER_ENTERING_WORLD
 -- [name] = { {{item1, amount}, {item2, amount}, ...}, isEnabled}
@@ -347,6 +421,217 @@ repeatableList["Quell the Silverwing Usurpers"].level = 60
 repeatableList["Vanquish the Invaders!"].level = 60
 
 ----------------------------------------------------------------------------------------------------
+-- Leveling Hands of Fate list
+----------------------------------------------------------------------------------------------------
+local fateList = {
+-- Specialization 1 Hands of Fate
+	["Specialization 1: Hand of Fate Level 10"] = true,
+	["Specialization 1: Hand of Fate Level 20"] = true,
+	["Specialization 1: Hand of Fate Level 30"] = true,
+	["Specialization 1: Hand of Fate Level 40"] = true,
+	["Specialization 1: Hand of Fate Level 50"] = true,
+	["Specialization 1: Hand of Fate Level 60"] = true,
+	["Specialization 1: Hand of Fate Level 61"] = true,
+	["Specialization 1: Hand of Fate Level 62"] = true,
+	["Specialization 1: Hand of Fate Level 63"] = true,
+	["Specialization 1: Hand of Fate Level 64"] = true,
+	["Specialization 1: Hand of Fate Level 65"] = true,
+	["Specialization 1: Hand of Fate Level 66"] = true,
+	["Specialization 1: Hand of Fate Level 67"] = true,
+	["Specialization 1: Hand of Fate Level 68"] = true,
+	["Specialization 1: Hand of Fate Level 69"] = true,
+	["Specialization 1: Hand of Fate Level 70"] = true,	
+-- Specialization 2 Hands of Fate
+	["Specialization 2: Hand of Fate Level 10"] = true,
+	["Specialization 2: Hand of Fate Level 20"] = true,
+	["Specialization 2: Hand of Fate Level 30"] = true,
+	["Specialization 2: Hand of Fate Level 40"] = true,
+	["Specialization 2: Hand of Fate Level 50"] = true,
+	["Specialization 2: Hand of Fate Level 60"] = true,
+	["Specialization 2: Hand of Fate Level 61"] = true,
+	["Specialization 2: Hand of Fate Level 62"] = true,
+	["Specialization 2: Hand of Fate Level 63"] = true,
+	["Specialization 2: Hand of Fate Level 64"] = true,
+	["Specialization 2: Hand of Fate Level 65"] = true,
+	["Specialization 2: Hand of Fate Level 66"] = true,
+	["Specialization 2: Hand of Fate Level 67"] = true,
+	["Specialization 2: Hand of Fate Level 68"] = true,
+	["Specialization 2: Hand of Fate Level 69"] = true,
+	["Specialization 2: Hand of Fate Level 70"] = true,	
+-- Specialization 3 Hands of Fate
+	["Specialization 3: Hand of Fate Level 10"] = true,
+	["Specialization 3: Hand of Fate Level 20"] = true,
+	["Specialization 3: Hand of Fate Level 30"] = true,
+	["Specialization 3: Hand of Fate Level 40"] = true,
+	["Specialization 3: Hand of Fate Level 50"] = true,
+	["Specialization 3: Hand of Fate Level 60"] = true,
+	["Specialization 3: Hand of Fate Level 61"] = true,
+	["Specialization 3: Hand of Fate Level 62"] = true,
+	["Specialization 3: Hand of Fate Level 63"] = true,
+	["Specialization 3: Hand of Fate Level 64"] = true,
+	["Specialization 3: Hand of Fate Level 65"] = true,
+	["Specialization 3: Hand of Fate Level 66"] = true,
+	["Specialization 3: Hand of Fate Level 67"] = true,
+	["Specialization 3: Hand of Fate Level 68"] = true,
+	["Specialization 3: Hand of Fate Level 69"] = true,
+	["Specialization 3: Hand of Fate Level 70"] = true,	
+-- Specialization 4 Hands of Fate
+	["Specialization 4: Hand of Fate Level 10"] = true,
+	["Specialization 4: Hand of Fate Level 20"] = true,
+	["Specialization 4: Hand of Fate Level 30"] = true,
+	["Specialization 4: Hand of Fate Level 40"] = true,
+	["Specialization 4: Hand of Fate Level 50"] = true,
+	["Specialization 4: Hand of Fate Level 60"] = true,
+	["Specialization 4: Hand of Fate Level 61"] = true,
+	["Specialization 4: Hand of Fate Level 62"] = true,
+	["Specialization 4: Hand of Fate Level 63"] = true,
+	["Specialization 4: Hand of Fate Level 64"] = true,
+	["Specialization 4: Hand of Fate Level 65"] = true,
+	["Specialization 4: Hand of Fate Level 66"] = true,
+	["Specialization 4: Hand of Fate Level 67"] = true,
+	["Specialization 4: Hand of Fate Level 68"] = true,
+	["Specialization 4: Hand of Fate Level 69"] = true,
+	["Specialization 4: Hand of Fate Level 70"] = true,	
+-- Specialization 5 Hands of Fate
+	["Specialization 5: Hand of Fate Level 10"] = true,
+	["Specialization 5: Hand of Fate Level 20"] = true,
+	["Specialization 5: Hand of Fate Level 30"] = true,
+	["Specialization 5: Hand of Fate Level 40"] = true,
+	["Specialization 5: Hand of Fate Level 50"] = true,
+	["Specialization 5: Hand of Fate Level 60"] = true,
+	["Specialization 5: Hand of Fate Level 61"] = true,
+	["Specialization 5: Hand of Fate Level 62"] = true,
+	["Specialization 5: Hand of Fate Level 63"] = true,
+	["Specialization 5: Hand of Fate Level 64"] = true,
+	["Specialization 5: Hand of Fate Level 65"] = true,
+	["Specialization 5: Hand of Fate Level 66"] = true,
+	["Specialization 5: Hand of Fate Level 67"] = true,
+	["Specialization 5: Hand of Fate Level 68"] = true,
+	["Specialization 5: Hand of Fate Level 69"] = true,
+	["Specialization 5: Hand of Fate Level 70"] = true,	
+-- Specialization 6 Hands of Fate
+	["Specialization 6: Hand of Fate Level 10"] = true,
+	["Specialization 6: Hand of Fate Level 20"] = true,
+	["Specialization 6: Hand of Fate Level 30"] = true,
+	["Specialization 6: Hand of Fate Level 40"] = true,
+	["Specialization 6: Hand of Fate Level 50"] = true,
+	["Specialization 6: Hand of Fate Level 60"] = true,
+	["Specialization 6: Hand of Fate Level 61"] = true,
+	["Specialization 6: Hand of Fate Level 62"] = true,
+	["Specialization 6: Hand of Fate Level 63"] = true,
+	["Specialization 6: Hand of Fate Level 64"] = true,
+	["Specialization 6: Hand of Fate Level 65"] = true,
+	["Specialization 6: Hand of Fate Level 66"] = true,
+	["Specialization 6: Hand of Fate Level 67"] = true,
+	["Specialization 6: Hand of Fate Level 68"] = true,
+	["Specialization 6: Hand of Fate Level 69"] = true,
+	["Specialization 6: Hand of Fate Level 70"] = true,	
+-- Specialization 7 Hands of Fate
+	["Specialization 7: Hand of Fate Level 10"] = true,
+	["Specialization 7: Hand of Fate Level 20"] = true,
+	["Specialization 7: Hand of Fate Level 30"] = true,
+	["Specialization 7: Hand of Fate Level 40"] = true,
+	["Specialization 7: Hand of Fate Level 50"] = true,
+	["Specialization 7: Hand of Fate Level 60"] = true,
+	["Specialization 7: Hand of Fate Level 61"] = true,
+	["Specialization 7: Hand of Fate Level 62"] = true,
+	["Specialization 7: Hand of Fate Level 63"] = true,
+	["Specialization 7: Hand of Fate Level 64"] = true,
+	["Specialization 7: Hand of Fate Level 65"] = true,
+	["Specialization 7: Hand of Fate Level 66"] = true,
+	["Specialization 7: Hand of Fate Level 67"] = true,
+	["Specialization 7: Hand of Fate Level 68"] = true,
+	["Specialization 7: Hand of Fate Level 69"] = true,
+	["Specialization 7: Hand of Fate Level 70"] = true,	
+-- Specialization 8 Hands of Fate
+	["Specialization 8: Hand of Fate Level 10"] = true,
+	["Specialization 8: Hand of Fate Level 20"] = true,
+	["Specialization 8: Hand of Fate Level 30"] = true,
+	["Specialization 8: Hand of Fate Level 40"] = true,
+	["Specialization 8: Hand of Fate Level 50"] = true,
+	["Specialization 8: Hand of Fate Level 60"] = true,
+	["Specialization 8: Hand of Fate Level 61"] = true,
+	["Specialization 8: Hand of Fate Level 62"] = true,
+	["Specialization 8: Hand of Fate Level 63"] = true,
+	["Specialization 8: Hand of Fate Level 64"] = true,
+	["Specialization 8: Hand of Fate Level 65"] = true,
+	["Specialization 8: Hand of Fate Level 66"] = true,
+	["Specialization 8: Hand of Fate Level 67"] = true,
+	["Specialization 8: Hand of Fate Level 68"] = true,
+	["Specialization 8: Hand of Fate Level 69"] = true,
+	["Specialization 8: Hand of Fate Level 70"] = true,	
+-- Specialization 9 Hands of Fate
+	["Specialization 9: Hand of Fate Level 10"] = true,
+	["Specialization 9: Hand of Fate Level 20"] = true,
+	["Specialization 9: Hand of Fate Level 30"] = true,
+	["Specialization 9: Hand of Fate Level 40"] = true,
+	["Specialization 9: Hand of Fate Level 50"] = true,
+	["Specialization 9: Hand of Fate Level 60"] = true,
+	["Specialization 9: Hand of Fate Level 61"] = true,
+	["Specialization 9: Hand of Fate Level 62"] = true,
+	["Specialization 9: Hand of Fate Level 63"] = true,
+	["Specialization 9: Hand of Fate Level 64"] = true,
+	["Specialization 9: Hand of Fate Level 65"] = true,
+	["Specialization 9: Hand of Fate Level 66"] = true,
+	["Specialization 9: Hand of Fate Level 67"] = true,
+	["Specialization 9: Hand of Fate Level 68"] = true,
+	["Specialization 9: Hand of Fate Level 69"] = true,
+	["Specialization 9: Hand of Fate Level 70"] = true,	
+-- Specialization 10 Hands of Fate
+	["Specialization 10: Hand of Fate Level 10"] = true,
+	["Specialization 10: Hand of Fate Level 20"] = true,
+	["Specialization 10: Hand of Fate Level 30"] = true,
+	["Specialization 10: Hand of Fate Level 40"] = true,
+	["Specialization 10: Hand of Fate Level 50"] = true,
+	["Specialization 10: Hand of Fate Level 60"] = true,
+	["Specialization 10: Hand of Fate Level 61"] = true,
+	["Specialization 10: Hand of Fate Level 62"] = true,
+	["Specialization 10: Hand of Fate Level 63"] = true,
+	["Specialization 10: Hand of Fate Level 64"] = true,
+	["Specialization 10: Hand of Fate Level 65"] = true,
+	["Specialization 10: Hand of Fate Level 66"] = true,
+	["Specialization 10: Hand of Fate Level 67"] = true,
+	["Specialization 10: Hand of Fate Level 68"] = true,
+	["Specialization 10: Hand of Fate Level 69"] = true,
+	["Specialization 10: Hand of Fate Level 70"] = true,	
+-- Specialization 11 Hands of Fate
+	["Specialization 11: Hand of Fate Level 10"] = true,
+	["Specialization 11: Hand of Fate Level 20"] = true,
+	["Specialization 11: Hand of Fate Level 30"] = true,
+	["Specialization 11: Hand of Fate Level 40"] = true,
+	["Specialization 11: Hand of Fate Level 50"] = true,
+	["Specialization 11: Hand of Fate Level 60"] = true,
+	["Specialization 11: Hand of Fate Level 61"] = true,
+	["Specialization 11: Hand of Fate Level 62"] = true,
+	["Specialization 11: Hand of Fate Level 63"] = true,
+	["Specialization 11: Hand of Fate Level 64"] = true,
+	["Specialization 11: Hand of Fate Level 65"] = true,
+	["Specialization 11: Hand of Fate Level 66"] = true,
+	["Specialization 11: Hand of Fate Level 67"] = true,
+	["Specialization 11: Hand of Fate Level 68"] = true,
+	["Specialization 11: Hand of Fate Level 69"] = true,
+	["Specialization 11: Hand of Fate Level 70"] = true,	
+-- Specialization 12 Hands of Fate
+	["Specialization 12: Hand of Fate Level 10"] = true,
+	["Specialization 12: Hand of Fate Level 20"] = true,
+	["Specialization 12: Hand of Fate Level 30"] = true,
+	["Specialization 12: Hand of Fate Level 40"] = true,
+	["Specialization 12: Hand of Fate Level 50"] = true,
+	["Specialization 12: Hand of Fate Level 60"] = true,
+	["Specialization 12: Hand of Fate Level 61"] = true,
+	["Specialization 12: Hand of Fate Level 62"] = true,
+	["Specialization 12: Hand of Fate Level 63"] = true,
+	["Specialization 12: Hand of Fate Level 64"] = true,
+	["Specialization 12: Hand of Fate Level 65"] = true,
+	["Specialization 12: Hand of Fate Level 66"] = true,
+	["Specialization 12: Hand of Fate Level 67"] = true,
+	["Specialization 12: Hand of Fate Level 68"] = true,
+	["Specialization 12: Hand of Fate Level 69"] = true,
+	["Specialization 12: Hand of Fate Level 70"] = true,	
+}
+
+
+----------------------------------------------------------------------------------------------------
 -- Daily quest list
 -- These quests will be automatically accepted if the daily setting is enabled
 ----------------------------------------------------------------------------------------------------
@@ -356,8 +641,8 @@ local dailyList = {
 	["Hero Architect: Mystic Runes (Daily)"] = true,
 	["Hero Architect: Mystic Orbs (Daily)"] = true,
 	["Hero Architect: Scroll of Unlearning - (Repeatable)"] = true,
-	["Mystic Scrolls: Unlocking Epic Powers"] = true,
-	["Mystic Scrolls: Unlocking Legendary Powers"] = true,
+	["Mystic Scrolls: Unlocking Epic Powers"] = false,
+	["Mystic Scrolls: Unlocking Legendary Powers"] = false,
 	-- Cooking/Fishing
 	["Bait Bandits"] = true,
 	["Crocolisks in the City"] = true,
@@ -471,13 +756,25 @@ local dailyList = {
 ----------------------------------------------------------------------------------------------------
 -- helper functions
 ----------------------------------------------------------------------------------------------------
+-- Specialization 2: Hand of Fate III
+local function getFateQuestText(name)
+	local spec, numeral = name:match("Specialization (%d*): Hand of Fate (.*)")
+	return tonumber(spec), RomanNumerals.ToNumber(numeral)
+end
+
+
 local function IsQuestEnabled(name)
+	local spec, numeral = getFateQuestText(name)
 	if AutoQuestSave.overrideList[name:lower()] ~= nil then
 		return AutoQuestSave.overrideList[name:lower()]
 	elseif dailyList[name] ~= nil then
 		return dailyList[name]
 	elseif repeatableList[name] ~= nil then
 		return repeatableList[name][2]
+	elseif fateList[name] ~= nil then
+		return fateList[name]
+	elseif spec and numeral then
+		return AutoQuestSave.specFate[spec]
 	end
 	return true
 end
@@ -527,7 +824,7 @@ eventFrame:SetScript("OnEvent", function(self, event)
 		on_quest = 1
 		repeat
 			name, level = select(1 + ((on_quest-1)*3), GetGossipActiveQuests())
-			if name and IsQuestEnabled(name) and IsQuestComplete(name, level) then
+			if name  and type(name) == "string" and IsQuestEnabled(name) and IsQuestComplete(name, level) then
 				SelectGossipActiveQuest(on_quest)
 				return
 			end
@@ -538,8 +835,13 @@ eventFrame:SetScript("OnEvent", function(self, event)
 		repeat
 			name, level = select(1 + ((on_quest-1)*3), GetGossipAvailableQuests())
 			if name and type(name) == "string" and not acceptedQuests[name] and IsQuestEnabled(name) then
+				local spec, numeral = getFateQuestText(name)
 				acceptedQuests[name] = true
-				if (AutoQuestSave.autoDaily and dailyList[name]) or AutoQuestSave.autoAccept or IsQuestComplete(name, level) then
+				if (AutoQuestSave.autoDaily and dailyList[name])
+				or (AutoQuestSave.autoFate and fateList[name])
+				or (AutoQuestSave.specFate[tonumber(spec)] and tonumber(numeral) < AutoQuestSave.maxFate)
+				or AutoQuestSave.autoAccept
+				or IsQuestComplete(name, level) then
 					SelectGossipAvailableQuest(on_quest)
 				end
 			end
@@ -562,16 +864,6 @@ eventFrame:SetScript("OnEvent", function(self, event)
 				return
 			end
 		end
-		-- for i=1,GetNumAvailableQuests() do
-		-- 	name = GetAvailableTitle(i)
-		-- 	level = GetAvailableLevel(i)
-		-- 	if not acceptedQuests[name] and IsQuestEnabled(name) then
-		-- 		if (AutoQuestSave.autoDaily and dailyList[name]) or AutoQuestSave.autoAccept or IsQuestComplete(name, level) then
-		-- 			acceptedQuests[name] = true
-		-- 			SelectAvailableQuest(i)
-		-- 		end
-		-- 	end
-		-- end
 		return
 	end
 
@@ -579,7 +871,12 @@ eventFrame:SetScript("OnEvent", function(self, event)
 	if event == "QUEST_DETAIL" then
 		local name = GetTitleText()
 		if IsQuestEnabled(name) then
-			if AutoQuestSave.autoAccept or (AutoQuestSave.autoDaily and dailyList[name]) or IsQuestComplete(name, 60) then
+			local spec, numeral = getFateQuestText(name)
+			if AutoQuestSave.autoAccept 
+			or (AutoQuestSave.autoDaily and dailyList[name])
+			or (AutoQuestSave.autoFate and fateList[name])
+			or (AutoQuestSave.specFate[tonumber(spec)] and tonumber(numeral) < AutoQuestSave.maxFate)
+			or IsQuestComplete(name, 60) then
 				acceptedQuests[name] = true
 				AcceptQuest()
 			end
@@ -618,9 +915,12 @@ eventFrame:SetScript("OnEvent", function(self, event)
 		if AutoQuestSave              == nil then AutoQuestSave              = {}    end
 		if AutoQuestSave.autoAccept   == nil then AutoQuestSave.autoAccept   = false end
 		if AutoQuestSave.autoDaily    == nil then AutoQuestSave.autoDaily    = true  end
+		if AutoQuestSave.autoFate     == nil then AutoQuestSave.autoFate     = true  end
 		if AutoQuestSave.autoRepeat   == nil then AutoQuestSave.autoRepeat   = true  end
 		if AutoQuestSave.autoComplete == nil then AutoQuestSave.autoComplete = true  end
 		if AutoQuestSave.overrideList == nil then AutoQuestSave.overrideList = {}    end
+		if AutoQuestSave.specFate     == nil then AutoQuestSave.specFate     = {}    end
+		if AutoQuestSave.maxFate      == nil then AutoQuestSave.maxFate      = 50   end
 
 		AutoQuestSave.overrideList["Allegiance to the Aldor"] = false
 		AutoQuestSave.overrideList["Allegiance to the Scryers"] = false
@@ -671,6 +971,37 @@ function SlashCmdList.AUTOQUEST(input)
 		return
 	end
 
+	if command == "fate" or command == "autofate" then
+		if value == "on" then
+			AutoQuestSave.autoFate = true
+		elseif value == "off" then
+			AutoQuestSave.autoFate = false
+		else
+			DEFAULT_CHAT_FRAME:AddMessage('Syntax: /aq fate <"on"|"off">')
+		end
+		DEFAULT_CHAT_FRAME:AddMessage("Automatically accepting fate quests is now " .. (AutoQuestSave.autoFate and ON_TEXT or OFF_TEXT) .. ".")
+		return
+	end
+
+	if command == "spec" then
+		if type(tonumber(value)) == "number" and tonumber(value) >= 1 and tonumber(value) <= 12 then
+			AutoQuestSave.specFate[tonumber(value)] = not AutoQuestSave.specFate[tonumber(value)]
+			DEFAULT_CHAT_FRAME:AddMessage("Automatically accepting spec "..value.." fate quests is now " .. (AutoQuestSave.specFate[tonumber(value)] and ON_TEXT or OFF_TEXT) .. ".")
+		else
+			DEFAULT_CHAT_FRAME:AddMessage('Syntax: /aq spec <"#1-12">')
+			DEFAULT_CHAT_FRAME:AddMessage(value)
+		end
+	end
+
+	if command == "max" or command == "maxfate" then
+		if type(tonumber(value)) == "number" and tonumber(value) >= 0 and tonumber(value) <= 500 then
+			AutoQuestSave.maxFate = tonumber(value)
+			DEFAULT_CHAT_FRAME:AddMessage("Maximum fate quests is now " .. AutoQuestSave.maxFate .. ".")
+		else
+			DEFAULT_CHAT_FRAME:AddMessage('Syntax: /aq max <"#0-500">')
+		end
+	end
+
 	if command == "accept" or command == "autoaccept" then
 		if value == "on" then
 			AutoQuestSave.autoAccept = true
@@ -719,15 +1050,37 @@ function SlashCmdList.AUTOQUEST(input)
 	end
 
 	DEFAULT_CHAT_FRAME:AddMessage("AutoQuest commands:", 1, 1, 0)
-	DEFAULT_CHAT_FRAME:AddMessage('/aq accept <"on"|"off">')
-	DEFAULT_CHAT_FRAME:AddMessage('/aq daily <"on"|"off">')
-	DEFAULT_CHAT_FRAME:AddMessage('/aq repeat <"on"|"off">')
-	DEFAULT_CHAT_FRAME:AddMessage('/aq complete <"on"|"off">')
+	DEFAULT_CHAT_FRAME:AddMessage('Toggled <"on"|"off">:',1, 1, 0)
+	DEFAULT_CHAT_FRAME:AddMessage('/aq [accept,daily,fate,repeat,complete] <"on"|"off">')
+	DEFAULT_CHAT_FRAME:AddMessage('Set Digit <#>:',1, 1, 0)
+	DEFAULT_CHAT_FRAME:AddMessage('/aq spec <#1-12>')
+	DEFAULT_CHAT_FRAME:AddMessage('/aq max <#>')
+	DEFAULT_CHAT_FRAME:AddMessage('Quest String:',1, 1, 0)
 	DEFAULT_CHAT_FRAME:AddMessage('/aq toggle <quest name>')
 	DEFAULT_CHAT_FRAME:AddMessage(" ")
-	DEFAULT_CHAT_FRAME:AddMessage(string.format("AutoAccept:[%s], AutoDaily:[%s], AutoRepeat:[%s], AutoComplete:[%s]",
+	DEFAULT_CHAT_FRAME:AddMessage(string.format(
+		"AutoAccept:[%s], AutoDaily:[%s], AutoFate:[%s], MaxFate:[%d], AutoRepeat:[%s], AutoComplete:[%s]",
 		AutoQuestSave.autoAccept and ON_TEXT or OFF_TEXT,
 		AutoQuestSave.autoDaily and ON_TEXT or OFF_TEXT,
+		AutoQuestSave.autoFate and ON_TEXT or OFF_TEXT,
+		AutoQuestSave.maxFate,
 		AutoQuestSave.autoRepeat and ON_TEXT or OFF_TEXT,
-		AutoQuestSave.autoComplete and ON_TEXT or OFF_TEXT))
+		AutoQuestSave.autoComplete and ON_TEXT or OFF_TEXT
+	))
+	DEFAULT_CHAT_FRAME:AddMessage(string.format(
+		"Spec 1[%s] 2[%s] 3[%s] 4[%s] 5[%s] 6[%s] 7[%s] 8[%s] 9[%s] 10[%s] 11[%s] 12[%s]",
+		AutoQuestSave.specFate[1] and ON_TEXT or OFF_TEXT,
+		AutoQuestSave.specFate[2] and ON_TEXT or OFF_TEXT,
+		AutoQuestSave.specFate[3] and ON_TEXT or OFF_TEXT,
+		AutoQuestSave.specFate[4] and ON_TEXT or OFF_TEXT,
+		AutoQuestSave.specFate[5] and ON_TEXT or OFF_TEXT,
+		AutoQuestSave.specFate[6] and ON_TEXT or OFF_TEXT,
+		AutoQuestSave.specFate[7] and ON_TEXT or OFF_TEXT,
+		AutoQuestSave.specFate[8] and ON_TEXT or OFF_TEXT,
+		AutoQuestSave.specFate[9] and ON_TEXT or OFF_TEXT,
+		AutoQuestSave.specFate[10] and ON_TEXT or OFF_TEXT,
+		AutoQuestSave.specFate[11] and ON_TEXT or OFF_TEXT,
+		AutoQuestSave.specFate[12] and ON_TEXT or OFF_TEXT
+	))
 end
+
