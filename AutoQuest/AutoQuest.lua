@@ -839,7 +839,7 @@ eventFrame:SetScript("OnEvent", function(self, event)
 				acceptedQuests[name] = true
 				if (AutoQuestSave.autoDaily and dailyList[name])
 				or (AutoQuestSave.autoFate and fateList[name])
-				or (AutoQuestSave.specFate[tonumber(spec)] and tonumber(numeral) < AutoQuestSave.maxFate)
+				or (AutoQuestSave.autoFate and AutoQuestSave.specFate[tonumber(spec)] and tonumber(numeral) < AutoQuestSave.maxFate)
 				or AutoQuestSave.autoAccept
 				or IsQuestComplete(name, level) then
 					SelectGossipAvailableQuest(on_quest)
@@ -875,7 +875,7 @@ eventFrame:SetScript("OnEvent", function(self, event)
 			if AutoQuestSave.autoAccept 
 			or (AutoQuestSave.autoDaily and dailyList[name])
 			or (AutoQuestSave.autoFate and fateList[name])
-			or (AutoQuestSave.specFate[tonumber(spec)] and tonumber(numeral) < AutoQuestSave.maxFate)
+			or (AutoQuestSave.autoFate and AutoQuestSave.specFate[tonumber(spec)] and tonumber(numeral) < AutoQuestSave.maxFate)
 			or IsQuestComplete(name, 60) then
 				acceptedQuests[name] = true
 				AcceptQuest()
