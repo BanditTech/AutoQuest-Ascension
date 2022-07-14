@@ -759,7 +759,7 @@ local dailyList = {
 -- Specialization 2: Hand of Fate III
 local function getFateQuestText(name)
 	local spec, numeral = name:match("Specialization (%d*): Hand of Fate (.*)")
-	return tonumber(spec), RomanNumerals.ToNumber(numeral)
+	return spec and tonumber(spec), numeral and RomanNumerals.ToNumber(numeral)
 end
 
 
