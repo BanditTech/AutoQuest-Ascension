@@ -759,7 +759,7 @@ local dailyList = {
 -- Specialization 2: Hand of Fate III
 local function getFateQuestText(name)
 	local spec, numeral = name:match("Specialization (%d*): Hand of Fate (.*)")
-	if strfind(numeral,"Level") then
+	if numeral and strfind(numeral,"Level") then
 		numeral = nil
 	end
 	return spec and tonumber(spec), numeral and RomanNumerals.ToNumber(numeral)
