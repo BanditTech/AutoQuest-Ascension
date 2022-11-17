@@ -563,20 +563,31 @@ local fateList = {
 -- These quests will be automatically accepted if the daily setting is enabled
 ----------------------------------------------------------------------------------------------------
 local dailyList = {
-	-- Ascension Quests
+	-- Ascension Hub Quests
 	["Forging Mystic Power"] = true,
 	["Hero Architect: Mystic Runes (Daily)"] = true,
 	["Hero Architect: Mystic Orbs (Daily)"] = true,
 	["Hero Architect: Scroll of Unlearning - (Repeatable)"] = true,
 	["Mystic Scrolls: Unlocking Epic Powers"] = false,
 	["Mystic Scrolls: Unlocking Legendary Powers"] = false,
-	-- High Risk Ascension - Tier 1
+	-- High Risk - Tier 1
 	["Population Control: Shadow Tomb (High-Risk)"] = true,
 	["Population Control: Tomb of Lights (High-Risk)"] = true,
 	["Population Control: Veil Shalas (High-Risk)"] = true,
+	["Population Control: Burning Blade Ruins (High-Risk)"] = true,
+	["Population Control: Kilsorrow Fortress (High-Risk)"] = true,
+	["Population Control: Manaforge Bnaar (High-Risk)"] = true,
+	["Population Control: Darkcrest Shore (High-Risk)"] = true,
+	["Population Control: Funggor Cavern (High-Risk)"] = true,
 	["War in Nagrand: Crystal Clear Solution (High-Risk)"] = true,
 	["War in Nagrand: Fields of Shadow (High-Risk)"] = true,
 	["War in Nagrand: Hate and Fear (High-Risk)"] = true,
+	["War in Zangarmarsh Umbrafen Village (High-Risk)"] = true,
+	["War in Zangarmarsh: Daggerfen Village (High-Risk)"] = true,
+	["War in Zangarmarsh: The Ango'rosh Stronghold (High-Risk)"] = true,
+	["War in Terokkar: Skettis (High-Risk)"] = true,
+	["War in Terokkar: Tomb of Lights (High-Risk)"] = true,
+	["War in Terokkar: Veil Shalas (High-Risk)"] = true,
 	-- Cooking/Fishing
 	["Bait Bandits"] = true,
 	["Crocolisks in the City"] = true,
