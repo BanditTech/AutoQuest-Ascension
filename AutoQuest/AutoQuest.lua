@@ -6,6 +6,14 @@ AutoQuestSave = nil -- player settings - defaults set up during PLAYER_ENTERING_
 -- [name] = { {{item1, amount}, {item2, amount}, ...}, isEnabled}
 ----------------------------------------------------------------------------------------------------
 local repeatableList = {
+-- Ascension
+	["High-Risk Events"] = { {{1203209, 4}}, true},
+	["Mystic Scrolls: Unlocking Epic Powers"] = { {{375250, 1000}}, false},
+	["Mystic Scrolls: Unlocking Legendary Powers"] = { {{375250, 2000}}, false},
+	["Hero Architect: Mystic Orbs (Daily)"] = { {{375250, 200}}, true},
+	["Hero Architect: Mystic Runes (Daily)"] = { {{375250, 200}}, true},
+	["Hero Architect: Scroll of Unlearning - (Repeatable)"] = { {{375250, 200}}, true},
+-- Original List
 	["10 Tickets - Last Month's Mutton"] = { {{19182, 10}}, false},
 	["12 Tickets - Lesser Darkmoon Prize"] = { {{19182, 12}}, false},
 	["1200 Tickets - Amulet of the Darkmoon"] = { {{19182, 1200}}, false},
@@ -563,13 +571,9 @@ local fateList = {
 -- These quests will be automatically accepted if the daily setting is enabled
 ----------------------------------------------------------------------------------------------------
 local dailyList = {
-	-- Ascension Hub Quests
+	-- Ascension
 	["Forging Mystic Power"] = true,
-	["Hero Architect: Mystic Runes (Daily)"] = true,
-	["Hero Architect: Mystic Orbs (Daily)"] = true,
-	["Hero Architect: Scroll of Unlearning - (Repeatable)"] = true,
-	["Mystic Scrolls: Unlocking Epic Powers"] = false,
-	["Mystic Scrolls: Unlocking Legendary Powers"] = false,
+	["Call to Arms: Battleground"] = true,
 	-- High Risk - Tier 1
 	["Population Control: Shadow Tomb (High-Risk)"] = true,
 	["Population Control: Tomb of Lights (High-Risk)"] = true,
@@ -760,7 +764,7 @@ eventFrame:SetScript("OnEvent", function(self, event)
 		-- check active quests
 		on_quest = 1
 		repeat
-			name, level = select(1 + ((on_quest-1)*3), GetGossipActiveQuests())
+			name, level = select(1 + ((on_quest-1)*4), GetGossipActiveQuests())
 			if name  and type(name) == "string" and IsQuestEnabled(name) and IsQuestComplete(name, level) then
 				SelectGossipActiveQuest(on_quest)
 				return
