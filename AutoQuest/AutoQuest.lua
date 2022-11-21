@@ -587,6 +587,7 @@ local dailyList = {
 	["Population Control: Forge Camp Fear (High-Risk)"] = true,
 	["Population Control: Laughing Skull Ruins (High-Risk)"] = true,
 	["Population Control: Northwind Cleft (High-Risk)"] = true,
+	["Population Control: Sunspring Post (High-Risk)"] = true,
 	["War in Nagrand: Crystal Clear Solution (High-Risk)"] = true,
 	["War in Nagrand: Fields of Shadow (High-Risk)"] = true,
 	["War in Nagrand: Hate and Fear (High-Risk)"] = true,
