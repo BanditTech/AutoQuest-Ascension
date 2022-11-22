@@ -574,7 +574,7 @@ local dailyList = {
 	-- Ascension
 	["Forging Mystic Power"] = true,
 	["Call to Arms: Battleground"] = true,
-	-- High Risk - Tier 1
+	-- High Risk - Tier 1 - Level 70
 	["Population Control: Shadow Tomb (High-Risk)"] = true,
 	["Population Control: Tomb of Lights (High-Risk)"] = true,
 	["Population Control: Veil Shalas (High-Risk)"] = true,
@@ -600,6 +600,10 @@ local dailyList = {
 	["War in Terokkar: Skettis (High-Risk)"] = true,
 	["War in Terokkar: Tomb of Lights (High-Risk)"] = true,
 	["War in Terokkar: Veil Shalas (High-Risk)"] = true,
+	-- High Risk - Tier 1 - Level 60
+	["Bloody Expedition: Kickin' Jurass"] = true,
+	["Bloody Expedition: Slithering Scar"] = true,
+	["Bloody Expedition: West Un'goro Crater Hunt"] = true,
 	-- Cooking/Fishing
 	["Bait Bandits"] = true,
 	["Crocolisks in the City"] = true,
