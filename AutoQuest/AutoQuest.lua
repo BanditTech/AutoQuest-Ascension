@@ -573,7 +573,6 @@ local fateList = {
 local dailyList = {
 	-- Ascension
 		["Forging Mystic Power"] = true,
-		["Call to Arms: Battleground"] = true,
 	-- High Risk - Tier 1 - Level 70
 		["Population Control: Burning Blade Ruins (High-Risk)"] = true,
 		["Population Control: Darkcrest Shore (High-Risk)"] = true,
@@ -610,7 +609,7 @@ local dailyList = {
 		["War in Terokkar: Bleeding Hollow Ruins (High-Risk)"] = true,
 		["War in Terokkar: Bonechewer Ruins (High-Risk)"] = true,
 		["War in Terokkar: Shadow Tomb (High-Risk)"] = true,
-		-- High Risk - Tier 2 - Level 70
+	-- High Risk - Tier 2 - Level 70
 		["Population Control: Skethlon Wreckage (High-Risk)"] = true,
 		["Population Control: The Deathforge (High-Risk)"] = true,
 		["Population Control: Bladespire Grounds (High-Risk)"] = true,
@@ -621,7 +620,7 @@ local dailyList = {
 		["War in Shadowmoon: Illidari Demon Hunting (High-Risk)"] = true,
 		["War in Shadowmoon: I am Become Death, Destroyer of Forges (High-Risk)"] = true,
 		["War in Shadowmoon: Draining the Cistern (High-Risk)"] = true,
-		-- High Risk - Tier 3 - Level 70
+	-- High Risk - Tier 3 - Level 70
 		["Population Control: The Vortex Fields (High-Risk)"] = true,
 		["Population Control: Manaforge Ara (High-Risk)"] = true,
 		["Population Control: Sunfury Hold (High-Risk)"] = true,
@@ -688,6 +687,7 @@ local dailyList = {
 		["Wanted: The Signet Ring of Prince Kael'thas"] = true,
 		["Wanted: The Warlord's Treatise"] = true,
 	-- PvP
+		["Call to Arms: Battleground"] = true,
 		["Call to Arms: Alterac Valley"] = true,
 		["Call to Arms: Arathi Basin"] = true,
 		["Call to Arms: Eye of the Storm"] = true,
