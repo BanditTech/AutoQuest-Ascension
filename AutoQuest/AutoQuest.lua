@@ -574,6 +574,8 @@ local dailyList = {
 	-- Ascension
 		["Forging Mystic Power"] = true,
 	-- High Risk - Tier 1 - Level 70
+		["Population Control: Skettis Veil Harrik (High-Risk)"] = true,
+		["Population Control: Skettis Upper Veil Shilak (High-Risk)"] = true,
 		["Population Control: Burning Blade Ruins (High-Risk)"] = true,
 		["Population Control: Darkcrest Shore (High-Risk)"] = true,
 		["Population Control: Darkcrest Enclave (High-Risk)"] = true,
@@ -593,6 +595,9 @@ local dailyList = {
 		["Population Control: Umbrafen Village (High-Risk)"] = true,
 		["War in Nagrand: Crystal Clear Solution (High-Risk)"] = true,
 		["War in Nagrand: Fields of Shadow (High-Risk)"] = true,
+		["War in Nagrand: War of the Ridge (High-Risk)"] = true,
+		["War in Nagrand: Terrifying Descent (High-Risk)"] = true,
+		["War in Nagrand: Bad Advice (High-Risk)"] = true,
 		["War in Nagrand: Hate and Fear (High-Risk)"] = true,
 		["War in Zangarmarsh Umbrafen Village (High-Risk)"] = true,
 		["War in Zangarmarsh: Daggerfen Village (High-Risk)"] = true,
