@@ -573,76 +573,6 @@ local fateList = {
 local dailyList = {
 	-- Ascension
 		["Forging Mystic Power"] = true,
-	-- High Risk - Tier 1 - Level 70
-		["Population Control: Skettis Veil Harrik (High-Risk)"] = true,
-		["Population Control: Skettis Upper Veil Shilak (High-Risk)"] = true,
-		["Population Control: Burning Blade Ruins (High-Risk)"] = true,
-		["Population Control: Darkcrest Shore (High-Risk)"] = true,
-		["Population Control: Darkcrest Enclave (High-Risk)"] = true,
-		["Population Control: Funggor Cavern (High-Risk)"] = true,
-		["Population Control: Forge Camp Fear (High-Risk)"] = true,
-		["Population Control: Kilsorrow Fortress (High-Risk)"] = true,
-		["Population Control: Laughing Skull Ruins (High-Risk)"] = true,
-		["Population Control: Manaforge Bnaar (High-Risk)"] = true,
-		["Population Control: Northwind Cleft (High-Risk)"] = true,
-		["Population Control: Sunspring Post (High-Risk)"] = true,
-		["Population Control: Shadow Tomb (High-Risk)"] = true,
-		["Population Control: The Lagoon (High-Risk)"] = true,
-		["Population Control: The Twilight Ridge (High-Risk)"] = true,
-		["Population Control: Tomb of Lights (High-Risk)"] = true,
-		["Population Control: Veil Shalas (High-Risk)"] = true,
-		["Population Control: Umbrafen Lake (High-Risk)"] = true,
-		["Population Control: Umbrafen Village (High-Risk)"] = true,
-		["War in Nagrand: Crystal Clear Solution (High-Risk)"] = true,
-		["War in Nagrand: Fields of Shadow (High-Risk)"] = true,
-		["War in Nagrand: War of the Ridge (High-Risk)"] = true,
-		["War in Nagrand: Terrifying Descent (High-Risk)"] = true,
-		["War in Nagrand: Bad Advice (High-Risk)"] = true,
-		["War in Nagrand: Hate and Fear (High-Risk)"] = true,
-		["War in Zangarmarsh Umbrafen Village (High-Risk)"] = true,
-		["War in Zangarmarsh: Daggerfen Village (High-Risk)"] = true,
-		["War in Zangarmarsh: The Ango'rosh Stronghold (High-Risk)"] = true,
-		["War in Zangarmarsh: Lost Tribes (High-Risk)"] = true,
-		["War in Zangarmarsh: The Darkcrest (High-Risk)"] = true,
-		["War in Zangarmarsh: The Dead Mire (High-Risk)"] = true,
-		["War in Terokkar: Skettis (High-Risk)"] = true,
-		["War in Terokkar: Tomb of Lights (High-Risk)"] = true,
-		["War in Terokkar: Veil Shalas (High-Risk)"] = true,
-		["War in Terokkar: Firewing Point (High-Risk)"] = true,
-		["War in Terokkar: The Barrier Hills (High-Risk)"] = true,
-		["War in Terokkar: Tuurem (High-Risk)"] = true,
-		["War in Terokkar: Bleeding Hollow Ruins (High-Risk)"] = true,
-		["War in Terokkar: Bonechewer Ruins (High-Risk)"] = true,
-		["War in Terokkar: Shadow Tomb (High-Risk)"] = true,
-	-- High Risk - Tier 2 - Level 70
-		["Population Control: Eclipse Point (High-Risk)"] = true,
-		["Population Control: Illidari Point (High-Risk)"] = true,
-		["Population Control: Skethlon Wreckage (High-Risk)"] = true,
-		["Population Control: The Deathforge (High-Risk)"] = true,
-		["Population Control: Bladespire Grounds (High-Risk)"] = true,
-		["Population Control: Bladespire Hold (High-Risk)"] = true,
-		["War in Blade's Edge: Arakkoa Assault (High Risk)"] = true,
-		["War in Blade's Edge: Raven's Wood Ranger (High Risk)"] = true,
-		["War in Blade's Edge: Silence Singing Ridge (High Risk)"] = true,
-		["War in Blade's Edge: A Gruuling Task (High-Risk)"] = true,
-		["War in Blade's Edge: An Ogri'normous Hunt (High-Risk)"] = true,
-		["War in Blade's Edge: Death Trap (High-Risk)"] = true,
-		["War in Shadowmoon: Illidari Demon Hunting (High-Risk)"] = true,
-		["War in Shadowmoon: I am Become Death, Destroyer of Forges (High-Risk)"] = true,
-		["War in Shadowmoon: Draining the Cistern (High-Risk)"] = true,
-	-- High Risk - Tier 3 - Level 70
-		["Population Control: The Vortex Fields (High-Risk)"] = true,
-		["Population Control: Manaforge Ara (High-Risk)"] = true,
-		["Population Control: Sunfury Hold (High-Risk)"] = true,
-		["Population Control: Eco Dome Skyperch (High-Risk)"] = true,
-		["Population Control: Ruins of Farahlon (High-Risk)"] = true,
-		["War in Netherstorm: War Forged (High-Risk)"] = true,
-		["War in Netherstorm: The Ruins Have Eyes (High Risk)"] = true,
-		["War in Netherstorm: 100% Quality Engineering (High-Risk)"] = true,
-	-- High Risk - Tier 1 - Level 60
-		["Bloody Expedition: Kickin' Jurass"] = true,
-		["Bloody Expedition: Slithering Scar"] = true,
-		["Bloody Expedition: West Un'goro Crater Hunt"] = true,
 	-- Cooking/Fishing
 		["Bait Bandits"] = true,
 		["Crocolisks in the City"] = true,
@@ -758,6 +688,10 @@ local dailyList = {
 -- helper functions
 ----------------------------------------------------------------------------------------------------
 
+local function IsHighRiskQuest(name)
+	return name:match("^Bloody Expedition:") or (name:match("%(High%-Risk%)$") and (name:match("^Population Control") or name:match("^War in")))
+end
+
 local function IsQuestEnabled(name)
 	if AutoQuestSave.overrideList[name:lower()] ~= nil then
 		return AutoQuestSave.overrideList[name:lower()]
@@ -831,6 +765,7 @@ eventFrame:SetScript("OnEvent", function(self, event)
 				acceptedQuests[name] = true
 				if (AutoQuestSave.autoDaily and dailyList[name])
 				or (AutoQuestSave.autoFate and fateList[name])
+				or (AutoQuestSave.autoHR and IsHighRiskQuest(name))
 				or AutoQuestSave.autoAccept
 				or IsQuestComplete(name, level) then
 					SelectGossipAvailableQuest(on_quest)
@@ -865,6 +800,7 @@ eventFrame:SetScript("OnEvent", function(self, event)
 			if AutoQuestSave.autoAccept 
 			or (AutoQuestSave.autoDaily and dailyList[name])
 			or (AutoQuestSave.autoFate and fateList[name])
+			or (AutoQuestSave.autoHR and IsHighRiskQuest(name))
 			or IsQuestComplete(name, 60) then
 				acceptedQuests[name] = true
 				AcceptQuest()
@@ -970,6 +906,18 @@ function SlashCmdList.AUTOQUEST(input)
 		return
 	end
 
+	if command == "hr" or command == "highrisk" or command == "autohr" then
+		if value == "on" then
+			AutoQuestSave.autoHR = true
+		elseif value == "off" then
+			AutoQuestSave.autoHR = false
+		else
+			DEFAULT_CHAT_FRAME:AddMessage('Syntax: /aq highrisk <"on"|"off">')
+		end
+		DEFAULT_CHAT_FRAME:AddMessage("Automatically accepting high-risk quests is now " .. (AutoQuestSave.autoFate and ON_TEXT or OFF_TEXT) .. ".")
+		return
+	end
+
 	if command == "accept" or command == "autoaccept" then
 		if value == "on" then
 			AutoQuestSave.autoAccept = true
@@ -1018,16 +966,17 @@ function SlashCmdList.AUTOQUEST(input)
 	end
 
 	DEFAULT_CHAT_FRAME:AddMessage("AutoQuest commands:", 1, 1, 0)
-	DEFAULT_CHAT_FRAME:AddMessage('/aq [accept,daily,fate,repeat,complete] <"on"|"off">')
+	DEFAULT_CHAT_FRAME:AddMessage('/aq [accept,daily,fate,repeat,complete,highrisk] <"on"|"off">')
 	DEFAULT_CHAT_FRAME:AddMessage('/aq toggle <quest name>')
 	DEFAULT_CHAT_FRAME:AddMessage(" ")
 	DEFAULT_CHAT_FRAME:AddMessage(string.format(
-		"AutoAccept:[%s], AutoDaily:[%s], AutoFate:[%s], AutoRepeat:[%s], AutoComplete:[%s]",
+		"AutoAccept:[%s], AutoDaily:[%s], AutoFate:[%s], AutoRepeat:[%s], AutoComplete:[%s], AutoHighRisk:[%s]",
 		AutoQuestSave.autoAccept and ON_TEXT or OFF_TEXT,
 		AutoQuestSave.autoDaily and ON_TEXT or OFF_TEXT,
 		AutoQuestSave.autoFate and ON_TEXT or OFF_TEXT,
 		AutoQuestSave.autoRepeat and ON_TEXT or OFF_TEXT,
-		AutoQuestSave.autoComplete and ON_TEXT or OFF_TEXT
+		AutoQuestSave.autoComplete and ON_TEXT or OFF_TEXT,
+		AutoQuestSave.autoHR and ON_TEXT or OFF_TEXT
 	))
 end
 
