@@ -689,7 +689,7 @@ local dailyList = {
 ----------------------------------------------------------------------------------------------------
 
 local function IsHighRiskQuest(name)
-	return name:match("^Bloody Expedition:") or (name:match("%(High%-Risk%)$") and (name:match("^Population Control") or name:match("^War in")))
+	return name:match("^Bloody Expedition:") or (name:match("%(High[- ]Risk%)$") and (name:match("^Population Control") or name:match("^War in")))
 end
 
 local function IsQuestEnabled(name)
